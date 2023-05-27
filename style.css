@@ -101,6 +101,12 @@ main #outputBox {
   user-select: none;
 }
 
+@media only screen and (max-width: 900px) {
+    #outputBox {
+        width: 90%;
+    }
+}
+
 /*
     hide input tags arrows
 */
