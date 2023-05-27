@@ -103,9 +103,9 @@ main #outputBox {
 }
 
 @media only screen and (max-width: 900px) {
-    #outputBox {
-        width: 90%;
-    }
+  #outputBox {
+    width: 90%;
+  }
 }
 
 /*
