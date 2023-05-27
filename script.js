@@ -1,31 +1,31 @@
-const initialPrice = document.getElementById('initial-price');
-const stockQuantity = document.getElementById('stocks-quantity');
-const currentPrice = document.getElementById('current-price');
+var initialPrice = document.querySelector('#initial-price');
+var stockQuantity = document.querySelector('#stocks-quantity');
+var currentPrice = document.querySelector('#current-price');
 
-const checkBtn = document.querySelector('#checkBtn');
-
-const initial = Number(initialPrice.value);
-const current = Number(currentPrice.value);
-const stock = Number(stockQuantity.value);
+var checkBtn = document.querySelector('#checkBtn');
 
 checkBtn.addEventListener('click', () => {
-    calculateProfit();
+    var initialpce = Number(initialPrice.value);
+    var stockqntty = Number(stockQuantity.value);
+    var currentpce = Number(currentPrice.value);
+
+    calculateProfit(initialpce, stockqntty, currentpce);
 })
 
-function calculateProfit() {
+function calculateProfit(initial, quantity, current) {
     if ( initialPrice.value.length === 0 || currentPrice.value.length === 0 || stockQuantity.value.length === 0 ) {
         outputHandler('PLEASE FILL OUT ALL FIELDS!');
         outputBox.style.color = "red";
     }
     else {
         if ( initial > current ) {
-            const loss = ( initial - current );
-            const lossPercent = (loss / current)*100;
+            const loss = ( initial - current ) * quantity;
+            const lossPercent = (loss / initial)*100;
             outputHandler('loss is ' + loss + ' and percent is ' + lossPercent + '%');
             outputBox.style.color = "red";
         }
         else if ( current > initial ) {
-            const profit = Number( current - initial );
+            const profit = Number( current - initial ) * quantity;
             const profitPercent = (profit / initial)*100;
             outputHandler('profit is ' + profit + ' and percent is ' + profitPercent + '%');
             outputBox.style.color = "green";
