@@ -1,43 +1,42 @@
-var initialPrice = document.querySelector('#initial-price');
-var stockQuantity = document.querySelector('#stocks-quantity');
-var currentPrice = document.querySelector('#current-price');
+const initialPrice = document.getElementById('initial-price');
+const stockQuantity = document.getElementById('stocks-quantity');
+const currentPrice = document.getElementById('current-price');
 
-var checkBtn = document.querySelector('#checkBtn');
+const checkBtn = document.querySelector('#checkBtn');
+
+const initial = Number(initialPrice.value);
+const current = Number(currentPrice.value);
+const stock = Number(stockQuantity.value);
 
 checkBtn.addEventListener('click', () => {
     calculateProfit();
-    currentValueColor()
 })
 
 function calculateProfit() {
-    if ( initialPrice.value > currentPrice.value ) {
-        var loss = ( initialPrice.value - currentPrice.value ) * stockQuantity.value;
-        var lossPercent = ( loss / initialPrice.value ) * 100;
-        outputHandler("the loss is " + loss + " and the percent is " + lossPercent + "%");
-    }
-    else if ( currentPrice.value > initialPrice.value ) {
-        var profit = ( currentPrice.value - initialPrice.value ) * stockQuantity.value;
-        var profitPercent = ( profit / initialPrice.value ) * 100;
-        outputHandler("the profit is "+ profit +" and the percent is " + profitPercent +"%");
+    if ( initialPrice.value.length === 0 || currentPrice.value.length === 0 || stockQuantity.value.length === 0 ) {
+        outputHandler('PLEASE FILL OUT ALL FIELDS!');
+        outputBox.style.color = "red";
     }
     else {
-        outputHandler("INVALID INPUT!");
+        if ( initial > current ) {
+            const loss = ( initial - current );
+            const lossPercent = (loss / current)*100;
+            outputHandler('loss is ' + loss + ' and percent is ' + lossPercent + '%');
+            outputBox.style.color = "red";
+        }
+        else if ( current > initial ) {
+            const profit = Number( current - initial );
+            const profitPercent = (profit / initial)*100;
+            outputHandler('profit is ' + profit + ' and percent is ' + profitPercent + '%');
+            outputBox.style.color = "green";
+        }
+        else {
+            outputHandler('INVALID INPUT!');
+            outputBox.style.color = "red";
+        }
     }
 }
 
 function outputHandler(message) {
     document.querySelector('#outputBox').innerHTML = message;
-}
-
-function currentValueColor() {
-    var color = "";
-    if ( initialPrice.value > currentPrice.value) {
-        outputBox.style.color = "red"; 
-    }
-    else if ( currentPrice.value > initialPrice.value ) {
-        outputBox.style.color = "green";
-    }
-    else {
-        outputBox.style.color = "red";
-    }
 }
